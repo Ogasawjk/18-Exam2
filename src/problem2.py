@@ -2,8 +2,8 @@
 Exam 2, problem 2.
 
 Authors: Dave Fisher, David Mutchler, Matt Boutell, their colleagues,
-         and PUT_YOUR_NAME_HERE.  October 2018.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and JUSTIN OGASAWARA.  October 2018.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import math
 import time
@@ -25,7 +25,6 @@ class Triangle(object):
         self.a = a
         self.b = b
         self.c = c
-
     def __repr__(self):
         """
         Returns a string representation of this Triangle, as per this example:
@@ -96,7 +95,6 @@ def prettify(number):
         # Treat it as a float to 2 decimal places:
         return '{:5.2f}'.format(number)
 
-
 ###############################################################################
 # The  main  function and the TODOs for you are after this:
 ###############################################################################
@@ -109,8 +107,8 @@ def main():
     print('Un-comment the calls in MAIN one by one')
     print(' to run the testing code as you complete the TODOs.')
 
-    # run_test_problem2a()
-    # run_test_problem2b()
+    #run_test_problem2a()
+    run_test_problem2b()
 
 
 def run_test_problem2a():
@@ -179,8 +177,8 @@ def run_test_problem2a():
     print("  Actual:  ", t2)  # Tests that the argument is NOT mutated.
     print_result_of_test(same_as_t2, t2)
 
-
 def problem2a(triangle):
+    return Triangle(2*triangle.a, 2*triangle.b, 2*triangle.c)
     """
     What comes in:  a Triangle
     What goes out:  Returns a new Triangle whose side lengths are all
@@ -196,11 +194,9 @@ def problem2a(triangle):
       :rtype: Triangle
     """
     # -------------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #          Tests have been written for you (above).
     # -------------------------------------------------------------------------
-
-
 def run_test_problem2b():
     """ Tests the   problem2b   function. """
 
@@ -326,14 +322,21 @@ def run_test_problem2b():
     print("  Expected:", same_as_t1_t2_t3)
     print("  Actual:  ", t1_t2_t3)
     print_result_of_test(same_as_t1_t2_t3, t1_t2_t3)
-
-
 # -----------------------------------------------------------------------------
 # HINT, IMPORTANT: In the following problem, do NOT try to write code to
 # compute the area of a Triangle.  Instead, look at the definition
 # of the Triangle class (at the top of this file) for a useful method.
 # -----------------------------------------------------------------------------
 def problem2b(triangles):
+    sum = 0
+    if len(triangles)==0:
+        return 0
+    else:
+        for k in range(len(triangles)):
+            my_triangle = Triangle(triangles[k].a, triangles[k].b, triangles[k].c)
+            area = my_triangle.get_area()
+            sum = sum + area
+    return sum
     """
     What comes in:  a sequence of Triangle objects (which could be empty)
       (where the   Triangle   class is defined above).
@@ -354,12 +357,10 @@ def problem2b(triangles):
       :rtype: int | float
     """
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #          Tests have been written for you (above).
     # IMPORTANT: See the HINT just before the DEF of this function.
     # -------------------------------------------------------------------------
-
-
 ###############################################################################
 # Our tests use the following to print error messages in red.
 # Do NOT change it.  You do NOT have to do anything with it.

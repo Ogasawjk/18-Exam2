@@ -5,8 +5,8 @@ This module contains:
   -- Methods you must implement for the Cloud object
   
 Authors: David Mutchler, Dave Fisher, Matt Boutell, their colleagues,
-         and PUT_YOUR_NAME_HERE.  October 2018.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and JUSTIN OGASAWARA.  October 2018.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import time
 from numbers import Number
@@ -25,10 +25,10 @@ def main():
     print('Un-comment the calls in MAIN one by one')
     print(' to run the testing code as you complete the TODOs.')
 
-    # run_test_init()
-    # run_test_rain()
-    # run_test_get_total_rain_amount()
-    # run_test_merge_cloud()
+    #run_test_init()
+    #run_test_rain()
+    #run_test_get_total_rain_amount()
+    run_test_merge_cloud()
 
 
 ###############################################################################
@@ -43,8 +43,13 @@ class Cloud(object):
         -- water, a number representing the amount of water this Cloud
              currently holds
     """
-
     def __init__(self, capacity, water):
+        self.capacity = capacity
+        self.total_rain = 0
+        if water > capacity:
+            self.water = capacity
+        else:
+            self.water = water
         """
         What comes in:
           -- capacity, a number representing the maximum amount of water
@@ -76,10 +81,18 @@ class Cloud(object):
           :type water: int | float
         """
         # ---------------------------------------------------------------------
-        # TODO: 2. Implement and test this method.
+        # DONE: 2. Implement and test this method.
         # ---------------------------------------------------------------------
-
     def rain(self, rain_amount):
+        if rain_amount > self.water:
+            rain_amount = self.water
+            self.water = 0
+            self.total_rain = self.total_rain + rain_amount
+            return rain_amount
+        else:
+            self.water = self.water - rain_amount
+            self.total_rain = self.total_rain + rain_amount
+            return rain_amount
         """
         What comes in:
           -- self
@@ -122,11 +135,10 @@ class Cloud(object):
           :rtype: int | float
         """
         # ---------------------------------------------------------------------
-        # TODO: 3. Implement and test this method.
+        # DONE: 3. Implement and test this method.
         # ---------------------------------------------------------------------
-
-
     def get_total_rain_amount(self):
+        return self.total_rain
         """
         What comes in:
           -- self
@@ -156,11 +168,13 @@ class Cloud(object):
           :rtype: int | float
         """
         # ---------------------------------------------------------------------
-        # TODO: 4. Implement and test this method.
+        # DONE: 4. Implement and test this method.
         # ---------------------------------------------------------------------
-
-
     def merge_cloud(self, another_cloud):
+        self.water = self.water + another_cloud.water
+        self.capacity = self.capacity + another_cloud.capacity
+        another_cloud.water = 0
+        another_cloud.capacity = 0
         """
         What comes in:
           -- self
@@ -189,10 +203,8 @@ class Cloud(object):
             #   cloud4.water      is 10
         """
         # ---------------------------------------------------------------------
-        # TODO: 5. Implement and test this method.
+        # DONE: 5. Implement and test this method.
         # ---------------------------------------------------------------------
-
-
 ###############################################################################
 # The TEST functions for the  Cloud  class begin here.
 ###############################################################################
@@ -217,7 +229,6 @@ def run_test_init():
     expected_capacity = 10
     expected_water = 10
     run_test_instance_variables(cloud2, expected_capacity, expected_water)
-
 
 def run_test_rain():
     """ Tests the   rain   method of the Cloud class. """
@@ -271,7 +282,6 @@ def run_test_rain():
     print()
     run_test_instance_variables(cloud3, 10, 0)
 
-
 def run_test_get_total_rain_amount():
     """ Tests the   get_total_rain_amount   method of the Cloud class. """
     print()
@@ -315,7 +325,6 @@ def run_test_get_total_rain_amount():
     print()
     run_test_instance_variables(cloud2, 10, 0)
 
-
 def run_test_merge_cloud():
     """ Tests the   merge_cloud   method of the Cloud class. """
     print()
@@ -346,7 +355,6 @@ def run_test_merge_cloud():
     #   cloud4.water      is 10
     run_test_instance_variables(cloud3, 0, 0)
     run_test_instance_variables(cloud4, 110, 10)
-
 
 ###############################################################################
 # The following are HELPER functions that display error messages in RED
